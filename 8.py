@@ -1,12 +1,12 @@
 import random
 import copy
 
-def create_puzzle():
+def create_puzzle(n):
     square = [[1,2,3],
 			  [4,5,6],
 			  [7,8,0]]
     pozof0 = [2,2]
-    n = 100
+
     while n > 0:
         
         ok = False     
@@ -76,8 +76,8 @@ def solve_puzzle(square, len, max_len, last_poz=-1):
 
 
 
-square1 = create_puzzle()
-square1 = [[6,8,3], [0,5,1], [2,4,7]]
+square1 = create_puzzle(100)
+
 print_square(square1)
 print('/////////')
 
