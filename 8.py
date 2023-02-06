@@ -6,7 +6,7 @@ def create_puzzle():
 			  [4,5,6],
 			  [7,8,0]]
     pozof0 = [2,2]
-    n = 20
+    n = 100
     while n > 0:
         
         ok = False     
@@ -44,7 +44,7 @@ def print_square(square):
     for row in square:
         print(row)
 
-def solve_puzzle(square, len, max_len):  
+def solve_puzzle(square, len, max_len, last_poz=-1):  
 
     solution = [[1,2,3],[4,5,6],[7,8,0]]
 
@@ -56,13 +56,16 @@ def solve_puzzle(square, len, max_len):
         return False
     
     poz_of_0 = find_position_of_0(square)
+    
     neighbors = find_neighbors(poz_of_0)
 
     for coords in neighbors:
+        if coords == last_poz:
+            continue
         square_aux = copy.deepcopy(square)
         square_aux[poz_of_0[0]][poz_of_0[1]], square_aux[coords[0]][coords[1]] = square_aux[coords[0]][coords[1]], square_aux[poz_of_0[0]][poz_of_0[1]]
         
-        rez = solve_puzzle(square_aux, len+1, max_len)
+        rez = solve_puzzle(square_aux, len+1, max_len, poz_of_0)
         if rez == True:
             print_square(square)
             return True
@@ -82,4 +85,4 @@ while rez == False:
     if maxi<15:
         maxi+=1
     else:
-        maxi+=5
+        maxi+=10
