@@ -39,17 +39,19 @@ def find_neighbors(poz):
             neighbors.append((poz[0], poz[1] + increment))
     return neighbors
 
-def print_square(square):
+def print_square(square, last_poz=-1):
     print('---------')
     for row in square:
         print(row)
+    if last_poz!=-1:
+        move = square[last_poz[0]][last_poz[1]]
+        print(f'Move: {move}')
 
 def solve_puzzle(square, len, max_len, last_poz=-1):  
-
     solution = [[1,2,3],[4,5,6],[7,8,0]]
 
     if square == solution:
-        print_square(square)
+        print_square(square, last_poz)
         return True
 
     if len == max_len:
@@ -67,13 +69,15 @@ def solve_puzzle(square, len, max_len, last_poz=-1):
         
         rez = solve_puzzle(square_aux, len+1, max_len, poz_of_0)
         if rez == True:
-            print_square(square)
+            print_square(square, last_poz) 
             return True
+        
     return False
 
 
 
 square1 = create_puzzle()
+square1 = [[6,8,3], [0,5,1], [2,4,7]]
 print_square(square1)
 print('/////////')
 
